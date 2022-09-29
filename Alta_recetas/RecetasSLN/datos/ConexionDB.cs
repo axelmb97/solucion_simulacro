@@ -46,6 +46,29 @@ namespace RecetasSLN.datos
             cnn.Close();
             return total;
         }
+        public DataTable ConsultaSpConParametros(string nombreSP,List<Parametro> param) {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                cnn.Open();
+                SqlCommand cmd = new SqlCommand(nombreSP,cnn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                foreach (Parametro p in param) {
+                    cmd.Parameters.AddWithValue(p.Nombre,p.Value);
+                }
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception)
+            {
+                dt = null;
+            }
+            finally {
+                cnn.Close();
+            }
+
+            return dt;
+        }
         public bool InsertarMaestroDetalle(Receta maestro,string spMaestro,string parametroSalida,string spDetalle) {
             bool aux = true;
             SqlTransaction t = null;
@@ -84,6 +107,45 @@ namespace RecetasSLN.datos
             }
             finally {
                 if (cnn != null && cnn.State == ConnectionState.Open) cnn.Close();
+            }
+            return aux;
+        }
+        public bool ModificarMaestroDetalle(string nombreSpMaestro,Receta datos,List<Parametro> paramMaestro,string nombreSpDetalle) {
+            bool aux = true;
+            SqlTransaction t = null;
+            try
+            {
+                cnn.Open();
+                t = cnn.BeginTransaction();
+                SqlCommand cmdMaestro = new SqlCommand(nombreSpMaestro, cnn, t);
+                cmdMaestro.CommandType = CommandType.StoredProcedure;
+                foreach (Parametro param in paramMaestro)
+                {
+                    cmdMaestro.Parameters.AddWithValue(param.Nombre, param.Value);
+                }
+                cmdMaestro.ExecuteNonQuery();
+
+                foreach (DetalleReceta dr in datos.Detalles)
+                {
+                    SqlCommand cmdDetalle = new SqlCommand(nombreSpDetalle, cnn, t);
+                    cmdDetalle.CommandType = CommandType.StoredProcedure;
+                    cmdDetalle.Parameters.AddWithValue("@id_receta", datos.RecetaNro);
+                    cmdDetalle.Parameters.AddWithValue("@id_ingrediente", dr.IngredienteDet.IngredienteId);
+                    cmdDetalle.Parameters.AddWithValue("@cantidad", dr.Cantidad);
+                    cmdDetalle.ExecuteNonQuery();
+                }
+                t.Commit();
+            }
+            catch (Exception)
+            {
+
+                t.Rollback();
+                aux = false;
+            }
+            finally {
+                if (cnn != null && cnn.State == ConnectionState.Open) {
+                    cnn.Close();
+                }
             }
             return aux;
         }

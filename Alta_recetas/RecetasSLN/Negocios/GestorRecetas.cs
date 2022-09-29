@@ -28,5 +28,14 @@ namespace RecetasSLN.Negocios
         public bool Confirmar(Receta receta) {
             return datos.InsertarReceta(receta);
         }
+        public DataTable ObtenerRecetasPorTipo(int idTipo) {
+            return datos.ObtenerRecetas(idTipo);
+        }
+        public DataTable ObtenerDetalleReceta(int idReceta) {
+            return datos.ObtenerDetalles(idReceta);
+        }
+        public bool ModificarReceta(Receta receta) {
+            return datos.Modificar(receta);
+        }
     }
 }

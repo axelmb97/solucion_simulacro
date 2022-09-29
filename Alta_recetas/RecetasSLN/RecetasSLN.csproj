@@ -50,6 +50,7 @@
     <Compile Include="datos\RecetasDao.cs" />
     <Compile Include="dominio\DetalleReceta.cs" />
     <Compile Include="dominio\Ingrediente.cs" />
+    <Compile Include="dominio\Parametro.cs" />
     <Compile Include="dominio\Receta.cs" />
     <Compile Include="Negocios\GestorRecetas.cs" />
     <Compile Include="presentación\FrmConsultarRecetas.cs">
@@ -64,6 +65,12 @@
     <Compile Include="presentación\FrmIngresoReceta.Designer.cs">
       <DependentUpon>FrmIngresoReceta.cs</DependentUpon>
     </Compile>
+    <Compile Include="presentación\FrmModificar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="presentación\FrmModificar.Designer.cs">
+      <DependentUpon>FrmModificar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="presentación\FrmConsultarRecetas.resx">
@@ -71,6 +78,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="presentación\FrmIngresoReceta.resx">
       <DependentUpon>FrmIngresoReceta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="presentación\FrmModificar.resx">
+      <DependentUpon>FrmModificar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

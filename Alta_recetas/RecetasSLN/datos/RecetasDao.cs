@@ -26,5 +26,28 @@ namespace RecetasSLN.datos
             bool aux = ConexionDB.ObtenerInstancia().InsertarMaestroDetalle(receta,"SP_INSERTAR_RECETA","@UltimoId","SP_INSERTAR_DETALLES");
             return aux;
         }
+        public DataTable ObtenerRecetas(int idTipo) {
+            List<Parametro> param = new List<Parametro>();
+            param.Add(new Parametro("@idTipo",idTipo));
+            DataTable dt = ConexionDB.ObtenerInstancia().ConsultaSpConParametros("SP_CONSULTAR_RECETAS",param);
+            return dt;
+        }
+        public DataTable ObtenerDetalles(int idReceta) {
+            List<Parametro> param = new List<Parametro>();
+            param.Add(new Parametro("@idReceta",idReceta));
+            DataTable dt = ConexionDB.ObtenerInstancia().ConsultaSpConParametros("SP_CONSULTAR_DETALLES",param);
+            return dt;
+        }
+        public bool Modificar(Receta receta) {
+            List<Parametro> paramMaestro = new List<Parametro>();
+            paramMaestro.Add(new Parametro("@idReceta",receta.RecetaNro));
+            paramMaestro.Add(new Parametro("@nombre",receta.Nombre));
+            paramMaestro.Add(new Parametro("@cheff",receta.Cheff));
+            paramMaestro.Add(new Parametro("@tipo_receta",receta.TipoReceta));
+           
+            
+            bool aux = ConexionDB.ObtenerInstancia().ModificarMaestroDetalle("SP_MODIFICAR_MAESTRO",receta,paramMaestro,"SP_INSERTAR_DETALLES");
+            return aux;
+        }
     }
 }

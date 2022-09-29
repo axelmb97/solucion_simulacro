@@ -38,12 +38,14 @@ namespace RecetasSLN.presentación
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblTotal = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnSalir = new System.Windows.Forms.Button();
+            this.btnNuevo = new System.Windows.Forms.Button();
+            this.btnEditar = new System.Windows.Forms.Button();
             this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheff = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBorrar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.btnNuevo = new System.Windows.Forms.Button();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAcciones = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -71,6 +73,7 @@ namespace RecetasSLN.presentación
             this.btnConsultar.TabIndex = 4;
             this.btnConsultar.Text = "Consultar";
             this.btnConsultar.UseVisualStyleBackColor = true;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
             // 
             // txtNombre
             // 
@@ -134,38 +137,13 @@ namespace RecetasSLN.presentación
             this.colNombre,
             this.colTipo,
             this.colCheff,
-            this.colBorrar});
+            this.colId,
+            this.colAcciones});
             this.dataGridView1.Location = new System.Drawing.Point(21, 29);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(479, 165);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // colNombre
-            // 
-            this.colNombre.HeaderText = "Nombre";
-            this.colNombre.Name = "colNombre";
-            this.colNombre.ReadOnly = true;
-            // 
-            // colTipo
-            // 
-            this.colTipo.HeaderText = "Tipo Receta";
-            this.colTipo.Name = "colTipo";
-            this.colTipo.ReadOnly = true;
-            // 
-            // colCheff
-            // 
-            this.colCheff.HeaderText = "Cheff";
-            this.colCheff.Name = "colCheff";
-            this.colCheff.ReadOnly = true;
-            // 
-            // colBorrar
-            // 
-            this.colBorrar.HeaderText = "";
-            this.colBorrar.Name = "colBorrar";
-            this.colBorrar.ReadOnly = true;
-            this.colBorrar.Text = "Eliminar";
-            this.colBorrar.UseColumnTextForButtonValue = true;
             // 
             // btnSalir
             // 
@@ -186,17 +164,63 @@ namespace RecetasSLN.presentación
             this.btnNuevo.UseVisualStyleBackColor = true;
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
+            // btnEditar
+            // 
+            this.btnEditar.Location = new System.Drawing.Point(116, 350);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(81, 23);
+            this.btnEditar.TabIndex = 4;
+            this.btnEditar.Text = "Editar";
+            this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            // 
+            // colNombre
+            // 
+            this.colNombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colNombre.HeaderText = "Nombre";
+            this.colNombre.Name = "colNombre";
+            this.colNombre.ReadOnly = true;
+            // 
+            // colTipo
+            // 
+            this.colTipo.HeaderText = "Tipo Receta";
+            this.colTipo.Name = "colTipo";
+            this.colTipo.ReadOnly = true;
+            // 
+            // colCheff
+            // 
+            this.colCheff.HeaderText = "Cheff";
+            this.colCheff.Name = "colCheff";
+            this.colCheff.ReadOnly = true;
+            // 
+            // colId
+            // 
+            this.colId.HeaderText = "idReceta";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            this.colId.Visible = false;
+            // 
+            // colAcciones
+            // 
+            this.colAcciones.HeaderText = "Acciones";
+            this.colAcciones.Name = "colAcciones";
+            this.colAcciones.ReadOnly = true;
+            this.colAcciones.Text = "Ver ingredientes";
+            this.colAcciones.UseColumnTextForButtonValue = true;
+            // 
             // FrmConsultarRecetas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(529, 378);
+            this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmConsultarRecetas";
             this.Text = "Consultar recetas";
+            this.Load += new System.EventHandler(this.FrmConsultarRecetas_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -217,11 +241,13 @@ namespace RecetasSLN.presentación
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Button btnNuevo;
+        private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTipo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheff;
-        private System.Windows.Forms.DataGridViewButtonColumn colBorrar;
-        private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.Button btnNuevo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colId;
+        private System.Windows.Forms.DataGridViewButtonColumn colAcciones;
     }
 }

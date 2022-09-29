@@ -10,7 +10,7 @@ namespace RecetasSLN.dominio
     {
         public Receta()
         {
-            //RecetaNro = -1;
+            RecetaNro = -1;
             Nombre = "";
             TipoReceta = -1;
             Cheff = "";
@@ -18,14 +18,14 @@ namespace RecetasSLN.dominio
         }
         public Receta(int recetaNro, string nombre, int tipoReceta, string cheff)
         {
-            //RecetaNro = recetaNro;
+            RecetaNro = recetaNro;
             Nombre = nombre;
             TipoReceta = tipoReceta;
             Cheff = cheff;
             Detalles = new List<DetalleReceta>(); 
         }
 
-        //public int RecetaNro { get; set; }
+        public int RecetaNro { get; set; }
         public string Nombre { get; set; }
         public int TipoReceta { get; set; }
         public string Cheff { get; set; }
